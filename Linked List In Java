@@ -1,0 +1,104 @@
+
+//Main class here:
+
+package linkedListManually;
+
+//import linkedListManual.myLinkList;
+
+public class llist {
+
+	public static void main(String[] args) {
+//		List<Integer> l=new LinkedList<>();
+		myLinkList list=new myLinkList();
+		list.insert(20);
+		list.insert(25);
+		list.insert(56);
+		list.insert(02);
+//		list.show();
+		list.insertAtStart(10);
+		list.insertAt(0, 11);//index starts from 0;
+		list.show();
+		System.out.println();
+		list.deleteAt(4);
+		list.show();
+		
+		//System.out.println(list);
+	}
+}
+
+package linkedListManually;
+
+//import linkedListManual.Node;
+
+public class Node {
+	int data;
+	Node next;
+}
+
+
+package linkedListManually;
+//
+//import linkedListManual.Node;
+
+public class myLinkList {
+	Node head; //this is head,stores only 1st node reference
+	public void show(){
+		Node node=head;
+		while(node.next!=null) {
+			System.out.println(node.data);
+			node=node.next;
+		}
+		System.out.println(node.data);
+	}
+	public void insert(int data) {
+		Node node =new Node();		//		generate node[node.data|node.next]
+		node.data =data;
+		node.next =null;
+		if(head== null){		//		empty node
+			head=node ;
+		}
+		else {					//		non-empty node
+			Node n=head;
+			while(n.next!=null){	//node traversal
+				n=n.next;
+			}
+			n.next=node;
+		}
+	}
+	public void insertAtStart(int data) {		// what? I'm not going to explain this
+		Node node =new Node();
+		node.data =data;
+		node.next =head;
+		head=node;
+	}
+	public void insertAt(int index,int data) {	//insert at a given location
+		Node node =new Node();
+		node.data =data;
+		node.next =null;						// node ready 
+		if(index==0) {						    //when empty linked list
+			insertAtStart(data);
+		}
+		else {
+			Node n =head;
+			for(int i=0;i<index-1;i++) {			//desired node spotted.We need to (index- 1)th nodelink to place the node at any location 
+				n=n.next;							
+			}
+			node.next=n.next;
+			n.next=node;
+		}
+	}
+	public void deleteAt(int index) {
+		if(index==0) {
+			head=head.next;
+		}
+		else {
+			Node n=head;
+			for(int i=0;i<index-1;i++) {
+				n=n.next;
+			}
+			n.next=n.next.next;
+		}
+	}
+	
+}
+
